@@ -34,7 +34,6 @@
     "cache-manager": "^6.4.3",
     "jimp": "^1.6.0",
     "libsignal": "npm:@meta.inc/libsignal",
-    "link-preview-js": "^3.0.15",
     "lodash": "^4.17.21",
     "music-metadata": "^11.2.2",
     "pino": "^9.6",
