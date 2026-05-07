@@ -1,17 +1,20 @@
 {
-  "name": "WaBail",
+  "name": "fsociety-Baileys",
   "version": "25.9.1",
-  "description": "baileys whatsapp-api",
+  "description": "Baileys WhatsApp API modificado por DevYerZx",
   "keywords": [
     "whatsapp",
-    "baileys"
+    "baileys",
+    "fsociety",
+    "bot-whatsapp"
   ],
-  "homepage": "https://github.com/dvwilker/WaBail",
+  "homepage": "https://github.com/DevYerZx/fsociety-Baileys",
   "repository": {
-    "url": "https://github.com/dvwilker/WaBail"
+    "type": "git",
+    "url": "https://github.com/DevYerZx/fsociety-Baileys.git"
   },
   "license": "MIT",
-  "author": "dvwilker",
+  "author": "DevYerZx",
   "main": "lib/index.js",
   "files": [
     "lib/*",
