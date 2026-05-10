@@ -111,7 +111,15 @@ type ProductListable = {
     };
 };
 type Cardsable = {
-    cards?: string[];
+    cards?: {
+        image?: WAMediaUpload;
+        video?: WAMediaUpload;
+        product?: WASendableProduct;
+        title?: string;
+        body?: string;
+        footer?: string;
+        buttons?: proto.Message.InteractiveMessage.NativeFlowMessage.NativeFlowButton[];
+    }[];
     subtitle?: string;
 };
 type Editable = {
