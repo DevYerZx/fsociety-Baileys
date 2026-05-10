@@ -88,11 +88,27 @@ type Interactiveable = {
     media?: boolean;
 };
 type Shopable = {
-    shop?: proto.Message.InteractiveMessage.ShopMessage.Surface;
+    shop?: proto.Message.InteractiveMessage.ShopMessage.Surface | {
+        surface: proto.Message.InteractiveMessage.ShopMessage.Surface;
+        id?: string;
+    };
     id?: string;
     title?: string;
     subtitle?: string;
     media?: boolean;
+};
+type ProductListable = {
+    productList?: {
+        title: string;
+        products: {
+            productId: string;
+        }[];
+    }[];
+    businessOwnerJid?: string;
+    bizJid?: string;
+    thumbnail?: {
+        jpegThumbnail?: Uint8Array | Buffer | null;
+    };
 };
 type Cardsable = {
     cards?: string[];
@@ -232,7 +248,7 @@ export type AlbumMedia = {
 export type AnyRegularMessageContent = (({
     text: string;
     linkPreview?: WAUrlInfo | null;
-} & Mentionable & Contextable & Buttonable & Templatable & Interactiveable & Shopable & Cardsable & Listable & Editable) | AnyMediaMessageContent | ({
+} & Mentionable & Contextable & Buttonable & Templatable & Interactiveable & Shopable & ProductListable & Cardsable & Listable & Editable) | AnyMediaMessageContent | ({
     poll: PollMessageOptions;
 } & Mentionable & Contextable & Buttonable & Templatable & Editable) | {
     contacts: {
