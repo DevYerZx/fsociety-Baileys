@@ -24,7 +24,7 @@
   ],
   "scripts": {
     "preinstall": "node ./engine-requirements.js",
-    "start": "node bot.js"
+    "start": "node index.js"
   },
   "dependencies": {
     "@cacheable/node-cache": "^1.5.5",
