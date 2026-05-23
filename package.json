@@ -23,7 +23,8 @@
     "engine-requirements.js"
   ],
   "scripts": {
-    "preinstall": "node ./engine-requirements.js"
+    "preinstall": "node ./engine-requirements.js",
+    "start": "node bot.js"
   },
   "dependencies": {
     "@cacheable/node-cache": "^1.5.5",
@@ -32,6 +33,7 @@
     "audio-decode": "^2.2.2",
     "axios": "^1.9.0",
     "cache-manager": "^6.4.3",
+    "dotenv": "^16.4.5",
     "jimp": "^1.6.0",
     "libsignal": "npm:@meta.inc/libsignal",
     "lodash": "^4.17.21",
