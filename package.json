@@ -33,6 +33,7 @@
     "audio-decode": "^2.2.2",
     "axios": "^1.9.0",
     "cache-manager": "^6.4.3",
+    "cheerio": "^1.1.2",
     "dotenv": "^16.4.5",
     "jimp": "^1.6.0",
     "libsignal": "npm:@meta.inc/libsignal",
