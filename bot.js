@@ -6,6 +6,7 @@ const {
   default: makeWASocket,
   useMultiFileAuthState,
   fetchLatestBaileysVersion,
+  fetchLatestWaWebVersion,
   DisconnectReason,
 } = require('./lib');
 const { Boom } = require('@hapi/boom');
@@ -59,7 +60,15 @@ async function startBot() {
   reloadCommands();
 
   const { state, saveCreds } = await useMultiFileAuthState(AUTH_FOLDER);
-  const { version } = await fetchLatestBaileysVersion();
+  const versionInfo =
+    typeof fetchLatestWaWebVersion === 'function'
+      ? await fetchLatestWaWebVersion().catch(() => null)
+      : null;
+  const fallbackVersionInfo = await fetchLatestBaileysVersion().catch(() => null);
+  const version =
+    versionInfo?.version ||
+    fallbackVersionInfo?.version ||
+    [2, 3000, 1015901307];
 
   const sock = makeWASocket({
     version,
