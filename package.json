@@ -24,7 +24,8 @@
   ],
   "scripts": {
     "preinstall": "node ./engine-requirements.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "node --test test/*.test.js"
   },
   "dependencies": {
     "@cacheable/node-cache": "^1.5.5",

@@ -11,6 +11,7 @@ const {
 } = require('./lib');
 const { Boom } = require('@hapi/boom');
 const { reloadCommands } = require('./utils/reloadCommands');
+const { isOwnerMessage } = require('./utils/ownerAuth');
 
 const PREFIX = process.env.BOT_PREFIX || '.';
 const OWNER_NUMBER = String(process.env.OWNER_NUMBER || '').replace(/\D/g, '');
@@ -28,10 +29,6 @@ let reconnectAttempts = 0;
 let startInFlight = null;
 let pairingCooldownUntil = 0;
 let lastPairingAttemptAt = 0;
-
-function normalizeNumber(value = '') {
-  return String(value || '').split('@')[0].split(':')[0].replace(/\D/g, '');
-}
 
 function getMessageText(msg = {}) {
   const m = msg.message || {};
@@ -59,13 +56,6 @@ async function getPairingTargetNumber() {
   const parsed = String(input || '').replace(/\D/g, '');
   if (!parsed) throw new Error('Numero invalido para vinculacion por codigo.');
   return parsed;
-}
-
-function isOwner(jid = '') {
-  const sender = normalizeNumber(jid);
-  if (!sender) return false;
-  if (!OWNER_NUMBER) return false;
-  return sender === OWNER_NUMBER;
 }
 
 function logInfo(text) {
@@ -307,7 +297,6 @@ async function startBot() {
       if (!m || m.key.fromMe) return;
 
       const from = m.key.remoteJid;
-      const sender = m.key.participant || from;
       const body = getMessageText(m).trim();
       if (!body || !body.startsWith(PREFIX)) return;
 
@@ -318,7 +307,7 @@ async function startBot() {
       const cmd = global.comandos?.get(commandName);
       if (!cmd) return;
 
-      const creator = isOwner(sender);
+      const creator = await isOwnerMessage(sock, m, OWNER_NUMBER, logWarn);
       if (cmd.isOwner && !creator) {
         await sock.sendMessage(from, { text: 'Solo el owner puede usar este comando.' }, { quoted: m });
         return;

@@ -75,6 +75,6 @@ export declare const assertMediaContent: (content: proto.IMessage | null | undef
 export declare const toJid: (id: string) => string;
 export declare const getSenderLid: (msg: WAMessage) => {
     jid: string;
-    lid: string;
+    lid: string | undefined;
 };
 export {};
