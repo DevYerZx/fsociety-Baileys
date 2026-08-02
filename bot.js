@@ -183,6 +183,9 @@ async function maybeRequestPairingCode(sock) {
   lastPairingAttemptAt = now;
 
   try {
+    if (typeof sock.waitForSocketOpen === 'function') {
+      await sock.waitForSocketOpen();
+    }
     const number = await getPairingTargetNumber();
     const code = await sock.requestPairingCode(number);
     logInfo(`Código de vinculación generado para ${number}.`);

@@ -23,7 +23,16 @@ async function isOwnerMessage(sock, message = {}, ownerNumber = '', onWarn = () 
     || key.senderLid
     || (String(key.remoteJid || '').endsWith('@lid') ? key.remoteJid : '');
 
-  if (!lid || !String(key.remoteJid || '').endsWith('@g.us')) return false;
+  if (!lid) return false;
+
+  try {
+    const mappedPn = await sock.signalRepository?.lidMapping?.getPNForLID(lid);
+    if (isOwnerJid(mappedPn, ownerNumber)) return true;
+  } catch (error) {
+    onWarn(`No se pudo consultar el mapeo persistente del LID ${lid}.`);
+  }
+
+  if (!String(key.remoteJid || '').endsWith('@g.us')) return false;
 
   try {
     const metadata = await sock.groupMetadata(key.remoteJid);

@@ -9,6 +9,7 @@ export * from './Defaults';
 export * from './WABinary';
 export * from './WAM';
 export * from './WAUSync';
+export * from './Signal/lid-mapping';
 
 export type WASocket = ReturnType<typeof makeWASocket>;
 

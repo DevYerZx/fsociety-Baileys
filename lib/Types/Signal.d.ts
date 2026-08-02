@@ -40,6 +40,7 @@ type E2ESessionOpts = {
     session: E2ESession;
 };
 export type SignalRepository = {
+    lidMapping?: import('../Signal/lid-mapping').LIDMappingStore;
     decryptGroupMessage(opts: DecryptGroupSignalOpts): Promise<Uint8Array>;
     processSenderKeyDistributionMessage(opts: ProcessSenderKeyDistributionMessageOpts): Promise<void>;
     decryptMessage(opts: DecryptSignalProtoOpts): Promise<Uint8Array>;

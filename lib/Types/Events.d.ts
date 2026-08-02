@@ -24,6 +24,7 @@ export type BaileysEventMap = {
         progress?: number | null;
         syncType?: proto.HistorySync.HistorySyncType;
         peerDataRequestSessionId?: string | null;
+        lidPnMappings?: { lid: string; pn: string }[];
     };
     /** upsert chats */
     'chats.upsert': Chat[];
@@ -32,6 +33,10 @@ export type BaileysEventMap = {
     'chats.phoneNumberShare': {
         lid: string;
         jid: string;
+    };
+    'lid-mapping.update': {
+        lid: string;
+        pn: string;
     };
     /** delete chats with given ID */
     'chats.delete': string[];

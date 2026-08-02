@@ -30,3 +30,11 @@ test('explicit sender phone number is accepted', async () => {
   const message = { key: { remoteJid: '123@g.us', participant: '777@lid', senderPn: `${OWNER}@s.whatsapp.net` } };
   assert.equal(await isOwnerMessage({}, message, OWNER), true);
 });
+
+test('owner is resolved from the persistent signal LID mapping', async () => {
+  const sock = {
+    signalRepository: { lidMapping: { getPNForLID: async () => `${OWNER}@s.whatsapp.net` } }
+  };
+  const message = { key: { remoteJid: '777@lid', senderLid: '777@lid' } };
+  assert.equal(await isOwnerMessage(sock, message, OWNER), true);
+});
